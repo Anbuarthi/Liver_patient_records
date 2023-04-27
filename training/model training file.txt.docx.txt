@@ -1,0 +1,521 @@
+seconds_in_a_day = 24 * 60 * 60
+seconds_in_a_day
+
+seconds_in_a_week = 7 * seconds_in_a_day
+seconds_in_a_week
+
+import numpy as np
+from matplotlib import pyplot as plt
+
+ys = 200 + np.random.randn(100)
+x = [x for x in range(len(ys))]
+
+plt.plot(x, ys, '-')
+plt.fill_between(x, ys, 195, where=(ys > 195), facecolor='g', alpha=0.6)
+
+plt.title("Sample Visualization")
+plt.show()
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data =pd.read_csv(r'/content/indian_liver_patient.csv')
+
+AgeGenderTotal_BilirubinDirect_BilirubinAlkaline_PhosphotaseAlamine_AminotransferaseAspartate_AminotransferaseTotal_ProtiensAlbuminAlbumin_and_Globulin_RatioDataset65Female0.70.118716186.83.30.90162Male10.95.5699641007.53.20.74162Male7.34.149060687.03.30.89158Male1.00.418214206.83.41.00172Male3.92.019527597.32.40.401
+data.shape
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 583 entries, 0 to 582
+Data columns (total 11 columns):
+ #   Column                      Non-Null Count  Dtype  
+---  ------                      --------------  -----  
+ 0   Age                         583 non-null    int64  
+ 1   Gender                      583 non-null    object 
+ 2   Total_Bilirubin             583 non-null    float64
+ 3   Direct_Bilirubin            583 non-null    float64
+ 4   Alkaline_Phosphotase        583 non-null    int64  
+ 5   Alamine_Aminotransferase    583 non-null    int64  
+ 6   Aspartate_Aminotransferase  583 non-null    int64  
+ 7   Total_Protiens              583 non-null    float64
+ 8   Albumin                     583 non-null    float64
+ 9   Albumin_and_Globulin_Ratio  579 non-null    float64
+ 10  Dataset                     583 non-null    int64  
+dtypes: float64(5), int64(5), object(1)
+memory usage: 50.2+ KB
+
+data.drop_duplicates()
+
+
+countmeanstdmin25%50%75%maxAge583.044.74614116.1898334.033.045.0058.090.0Total_Bilirubin583.03.2987996.2095220.40.81.002.675.0Direct_Bilirubin583.01.4861062.8084980.10.20.301.319.7Alkaline_Phosphotase583.0290.576329242.93798963.0175.5208.00298.02110.0Alamine_Aminotransferase583.080.713551182.62035610.023.035.0060.52000.0Aspartate_Aminotransferase583.0109.910806288.91852910.025.042.0087.04929.0Total_Protiens583.06.4831901.0854512.75.86.607.29.6Albumin583.03.1418520.7955190.92.63.103.85.5Albumin_and_Globulin_Ratio579.00.9470640.3195920.30.70.931.12.8Dataset583.01.2864490.4524901.01.01.002.02.0
+data.describe().transpose()
+Age                           0
+Gender                        0
+Total_Bilirubin               0
+Direct_Bilirubin              0
+Alkaline_Phosphotase          0
+Alamine_Aminotransferase      0
+Aspartate_Aminotransferase    0
+Total_Protiens                0
+Albumin                       0
+Albumin_and_Globulin_Ratio    4
+Dataset                       0
+dtype: int64
+
+data.duplicated().sum()
+
+
+AgeGenderTotal_BilirubinDirect_BilirubinAlkaline_PhosphotaseAlamine_AminotransferaseAspartate_AminotransferaseTotal_ProtiensAlbuminAlbumin_and_Globulin_RatioDataset065Female0.70.118716186.83.30.901162Male10.95.5699641007.53.20.741262Male7.34.149060687.03.30.891358Male1.00.418214206.83.41.001472Male3.92.019527597.32.40.401....................................57860Male0.50.150020345.91.60.37257940Male0.60.19835316.03.21.10158052Male0.80.224548496.43.21.00158131Male1.30.518429326.83.41.00158238Male1.00.321621247.34.41.502
+data.Dataset.value_counts()
+
+1    416
+2    167
+Name: Dataset, dtype: int64
+
+data.shape
+
+(583, 11)
+
+data['Age'].describe()
+count    583.000000
+mean      44.746141
+std       16.189833
+min        4.000000
+25%       33.000000
+50%       45.000000
+75%       58.000000
+max       90.000000
+Name: Age, dtype: float64
+
+data['Age'].describe()
+count    583.000000
+mean      44.746141
+std       16.189833
+min        4.000000
+25%       33.000000
+50%       45.000000
+75%       58.000000
+max       90.000000
+Name: Age, dtype: float64
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Age', data = data,color='maroon')
+plt.title('Boxplot for Age Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Age', data = data,color='maroon')
+plt.title('Boxplot for Age Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Age'], kde = True,color='maroon')
+plt.title('Histogram for Age Variable')
+plt.show()
+
+
+
+
+
+
+plt.figure(figsize=[12,4])
+sns.countplot(y = data['Gender'],palette='Greens')
+plt.title('Histogram for Age Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Total_Bilirubin'], kde = True,color='maroon')
+plt.title('Histogram for Total_Bilirubin Variable')
+plt.show()
+
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Direct_Bilirubin'], kde = True,color='maroon')
+plt.title('Histogram for Direct_Bilirubin Variable')
+plt.show()
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Alkaline_Phosphotase', data = data,color='maroon')
+plt.title('Boxplot for Alkaline_Phosphotase Variable')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Alkaline_Phosphotase'], kde = True,color='maroon')
+plt.title('Histogram for Alkaline_Phosphotase Variable')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Alamine_Aminotransferase'], kde = True,color='maroon')
+plt.title('Histogram for Alamine_Aminotransferase Variable')
+plt.show()
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Alamine_Aminotransferase', data = data,color='maroon')
+plt.title('Boxplot for Alamine_Aminotransferase Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Aspartate_Aminotransferase'], kde = True,color='maroon')
+plt.title('Histogram for Aspartate_Aminotransferase Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Aspartate_Aminotransferase', data = data,color='maroon')
+plt.title('Boxplot for Aspartate_Aminotransferase Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Total_Protiens'], kde = True,color='maroon')
+plt.title('Histogram for Total_Protiens Variable')
+plt.show()
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Total_Protiens', data = data,color='maroon')
+plt.title('Boxplot for Total_Protiens Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Albumin'], kde = True,color='maroon')
+plt.title('Histogram for Albumin Variable')
+plt.show()
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Albumin', data = data,color='maroon')
+plt.title('Boxplot for Albumin Variable')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.histplot(data = data['Albumin_and_Globulin_Ratio'], kde = True,color='maroon')
+plt.title('Histogram for Albumin_and_Globulin_Ratio Variable')
+plt.show()
+
+plt.figure(figsize=[12,3])
+sns.boxplot(x = 'Albumin_and_Globulin_Ratio', data = data,color='maroon')
+plt.title('Boxplot for Albumin_and_Globulin_Ratio Variable')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.countplot(y = data['Dataset'],palette='Greens')
+plt.title('countplot for Dataset Variable')
+plt.show()
+
+data.corr()
+
+plt.figure(figsize = [20,8])
+sns.heatmap(data.corr(),annot=True,cmap='magma', vmin=-1, vmax=1)
+
+
+plt.figure(figsize=[12,4])
+sns.countplot(x = data['Dataset'],hue=data['Gender'],palette='magma')
+plt.title('countplot for Dataset Variable')
+plt.show()
+
+
+data.info()
+AgeTotal_BilirubinDirect_BilirubinAlkaline_PhosphotaseAlamine_AminotransferaseAspartate_AminotransferaseTotal_ProtiensAlbuminAlbumin_and_Globulin_RatioDatasetAge1.0000000.0117630.0075290.080425-0.086883-0.019910-0.187461-0.265924-0.216408-0.137351Total_Bilirubin0.0117631.0000000.8746180.2066690.2140650.237831-0.008099-0.222250-0.206267-0.220208Direct_Bilirubin0.0075290.8746181.0000000.2349390.2338940.257544-0.000139-0.228531-0.200125-0.246046Alkaline_Phosphotase0.0804250.2066690.2349391.0000000.1256800.167196-0.028514-0.165453-0.234166-0.184866Alamine_Aminotransferase-0.0868830.2140650.2338940.1256801.0000000.791966-0.042518-0.029742-0.002375-0.163416Aspartate_Aminotransferase-0.0199100.2378310.2575440.1671960.7919661.000000-0.025645-0.085290-0.070040-0.151934Total_Protiens-0.187461-0.008099-0.000139-0.028514-0.042518-0.0256451.0000000.7840530.2348870.035008Albumin-0.265924-0.222250-0.228531-0.165453-0.029742-0.0852900.7840531.0000000.6896320.161388Albumin_and_Globulin_Ratio-0.216408-0.206267-0.200125-0.234166-0.002375-0.0700400.2348870.6896321.0000000.163131Dataset-0.137351-0.220208-0.246046-0.184866-0.163416-0.1519340.0350080.1613880.1631311.000000
+plt.figure(figsize = [20,8])
+sns.heatmap(data.corr(),annot=True,cmap='magma', vmin=-1, vmax=1)
+
+
+plt.figure(figsize=[12,4])
+sns.countplot(x = data['Dataset'],hue=data['Gender'],palette='magma')
+plt.title('countplot for Dataset Variable')
+plt.show()
+
+
+data.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 583 entries, 0 to 582
+Data columns (total 11 columns):
+ #   Column                      Non-Null Count  Dtype  
+---  ------                      --------------  -----  
+ 0   Age                         583 non-null    int64  
+ 1   Gender                      583 non-null    object 
+ 2   Total_Bilirubin             583 non-null    float64
+ 3   Direct_Bilirubin            583 non-null    float64
+ 4   Alkaline_Phosphotase        583 non-null    int64  
+ 5   Alamine_Aminotransferase    583 non-null    int64  
+ 6   Aspartate_Aminotransferase  583 non-null    int64  
+ 7   Total_Protiens              583 non-null    float64
+ 8   Albumin                     583 non-null    float64
+ 9   Albumin_and_Globulin_Ratio  579 non-null    float64
+ 10  Dataset                     583 non-null    int64  
+dtypes: float64(5), int64(5), object(1)
+memory usage: 50.2+ KB
+
+var_list=['Total_Bilirubin', 'Direct_Bilirubin',
+       'Alkaline_Phosphotase', 'Alamine_Aminotransferase',
+       'Aspartate_Aminotransferase', 'Total_Protiens', 'Albumin',
+       'Albumin_and_Globulin_Ratio']
+def draw_scattterplots(df, variables, n_rows, n_cols):
+    fig=plt.figure(figsize = [20,20])
+    for i, var_name in enumerate(variables):
+        ax=fig.add_subplot(n_rows,n_cols,i+1)
+        sns.scatterplot(x=df[var_name],y=df[var_name],ax=ax)
+        ax.set_title(var_name+" Distribution")
+    fig.tight_layout()  # Improves appearance a bit.
+    plt.show()
+
+#test = pd.DataFrame(np.random.randn(30, 9), columns=map(str, range(9)))
+draw_scattterplots(data, data[var_list],8,4)
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Direct_Bilirubin'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin (Direct Vs Total)')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Alkaline_Phosphotase'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Alkaline_Phosphotase')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Alamine_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Alamine_Aminotransferase')
+plt.show()plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Direct_Bilirubin'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin (Direct Vs Total)')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Alkaline_Phosphotase'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Alkaline_Phosphotase')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Alamine_Aminotransferase'],hue=data['Dataset'],palette='deep') 
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Aspartate_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Aspartate_Aminotransferase')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Total_Protiens'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Total_Protiens')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Albumin'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Albumin')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Albumin_and_Globulin_Ratio'],hue=data['Dataset'],palette='deep')
+plt.title('Billirunin  Vs Albumin_and_Globulin_Ratio')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Direct_Bilirubin'],y=data['Alamine_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Direct_Bilirubin  Vs Alkaline_Phosphotase')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Alamine_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Total_Bilirubin  Vs Alamine_Aminotransferase')
+plt.show()
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Aspartate_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Total_Bilirubin  Vs Aspartate_Aminotransferase')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Bilirubin'],y=data['Albumin'],hue=data['Dataset'],palette='deep')
+plt.title('Total_Bilirubin  Vs Albumin')
+plt.show()
+
+
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Alkaline_Phosphotase'],y=data['Total_Protiens'],hue=data['Dataset'],palette='deep')
+plt.title('Alkaline_Phosphotase  Vs Total_Protiens')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Alkaline_Phosphotase'],y=data['Albumin'],hue=data['Dataset'],palette='deep')
+plt.title('Alkaline_Phosphotase  Vs Albumin')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Alkaline_Phosphotase'],y=data['Albumin_and_Globulin_Ratio'],hue=data['Dataset'],palette='deep')
+plt.title('Alkaline_Phosphotase  Vs Albumin_and_Globulin_Ratio')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Alamine_Aminotransferase'],y=data['Aspartate_Aminotransferase'],hue=data['Dataset'],palette='deep')
+plt.title('Alamine_Aminotransferase  Vs Aspartate_Aminotransferase')
+plt.show()
+
+
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Aspartate_Aminotransferase'],y=data['Albumin'],hue=data['Dataset'],palette='deep')
+plt.title('Aspartate_Aminotransferase  Vs Albumin')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Aspartate_Aminotransferase'],y=data['Albumin_and_Globulin_Ratio'],hue=data['Dataset'],palette='deep')
+plt.title('Aspartate_Aminotransferase  Vs Albumin_and_Globulin_Ratio')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Protiens'],y=data['Albumin'],hue=data['Dataset'],palette='deep')
+plt.title('Total_Protiens  Vs Albumin')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Total_Protiens'],y=data['Albumin_and_Globulin_Ratio'],hue=data['Dataset'],palette='deep')
+plt.title('Total_Protiens  Vs Albumin_and_Globulin_Ratio')
+plt.show()
+
+plt.figure(figsize=[12,4])
+sns.scatterplot(x = data['Albumin'],y=data['Albumin_and_Globulin_Ratio'],hue=data['Dataset'],palette='deep')
+plt.title('Albumin  Vs Albumin_and_Globulin_Ratio')
+plt.show()
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Total_Bilirubin', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Total_Bilirubin', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Total_billirubin")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Total_Bilirubin', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Total_Bilirubin', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Total_billirubin")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Alkaline_Phosphotase', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Alkaline_Phosphotase', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Alkaline_Phosphotase")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Alkaline_Phosphotase', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Alkaline_Phosphotase', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Alkaline_Phosphotase")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Aspartate_Aminotransferase', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Aspartate_Aminotransferase', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Aspartate_Aminotransferase")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Total_Protiens', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Total_Protiens', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Total_Protiens")
+plt.show()
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Albumin', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Albumin', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Albumin")
+plt.show()
+
+
+#plot 1:
+plt.subplot(1, 2, 1)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Dataset', y = 'Albumin_and_Globulin_Ratio', data = data)
+
+
+
+#plot 2:
+plt.subplot(1, 2, 2)
+sns.set_style("whitegrid")
+sns.boxplot(x = 'Gender', y = 'Albumin_and_Globulin_Ratio', data = data)
+
+plt.tight_layout()
+plt.suptitle("Boxplot for Albumin_and_Globulin_Ratio")
+plt.show()
+
